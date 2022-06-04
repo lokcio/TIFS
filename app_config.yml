@@ -1,0 +1,13 @@
+tasks:
+  feod_blacklist:
+    provider: "HTTP"
+    params:
+      url: "https://feodotracker.abuse.ch/downloads/ipblocklist_recommended_paloalto.txt"
+    interval: 1
+    enabled: 1
+  feod_blacklist_IOC:
+    provider: "HTTP"
+    params:
+      url: "https://feodotracker.abuse.ch/downloads/ipblocklist.txt"
+    interval: 1
+    enabled: 1
