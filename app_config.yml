@@ -9,5 +9,38 @@ tasks:
     provider: "HTTP"
     params:
       url: "https://feodotracker.abuse.ch/downloads/ipblocklist.txt"
-    interval: 1
+    interval: 60
     enabled: 1
+  otx_reputation_IOC:
+    provider: "HTTP"
+    params:
+      url: "https://reputation.alienvault.com/reputation.generic"
+    interval: 60
+    enabled: 1
+  by_contry:
+    provider: "HTTP"
+    params:
+      url: "http://www.ipdeny.com/ipblocks/data/countries/by.zone"
+    interval: 240
+    enabled: 1
+  ru_contry:
+    provider: "HTTP"
+    params:
+      url: "http://www.ipdeny.com/ipblocks/data/countries/ru.zone"
+    interval: 240
+    enabled: 1
+  export-blacklist:
+    provider: "EXPORT"
+    params:
+      file_name: "generated_blacklist"
+      source_blacklists_names: ["feod_blacklist", "by_contry", "ru_contry"]
+    interval: 60
+    enabled: 1
+  export-ioc:
+    provider: "EXPORT"
+    params:
+      file_name: "ioc_list"
+      source_blacklists_names: ["feod_blacklist_IOC","otx_reputation_IOC"]
+    interval: 60
+    enabled: 1
+

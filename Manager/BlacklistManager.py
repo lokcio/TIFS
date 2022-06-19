@@ -4,18 +4,18 @@ from Model.Blacklist import Blacklist
 
 
 class BlacklistManager:
-    def __init__(self, session: Session):
-        self.session = session
+    def __init__(self, db: SQLAlchemy):
+        self.db = db
 
     def insert_one(self, blacklist: Blacklist):
-        self.session.add(blacklist)
-        self.session.commit()
+        self.db.session.add(blacklist)
+        self.db.session.commit()
         return True
 
     def insert_many(self, blacklists: list):
         for blacklist in blacklists:
-            self.session.add(blacklist)
-        self.session.commit()
+            self.db.session.add(blacklist)
+        self.db.session.commit()
         return True
 
     #

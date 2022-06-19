@@ -10,7 +10,7 @@ class Task(Base):
     name = Column(String)
     provider = Column(String)
     params = Column(JSON)
-    interval = Column(Integer)
+    interval = Column(Float)
     last_run = Column(Date)
     last_result = Column(String)
     enabled = Column(Boolean)

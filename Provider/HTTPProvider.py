@@ -13,5 +13,14 @@ class HTTPProvider:
         response = requests.get(self.task.params.url)
         for line in response.text.split('/n'):
             line = line.strip()
+            if line == '':
+                continue
+            if "#" in line:
+                if "#" != line[0]:
+                    line = line[:line.find("#")]
+                else:
+                    continue
+            if " " in line:
+                line = line.replace(" ", "")
             data.append(Blacklist(addr=line, source=self.task.name))
         return data
