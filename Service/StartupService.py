@@ -1,5 +1,6 @@
 import os
 import yaml
+from flask_sqlalchemy import SQLAlchemy
 
 from Manager.TaskManager import TaskManager
 from Model.Task import Task
@@ -8,12 +9,14 @@ from Model.Task import Task
 class StartupService:
     def __init__(self, taskManager: TaskManager):
         self.taskManager = taskManager
+        self.db = db
 
     def prepare_database(self):
         pass
 
     def load_configuration(self, filename=os.getenv('CONFIG_NAME')):
         tasks = []
+        self.taskManager.truncate()
         with open(os.getcwd() + '/' + filename) as file:
             parsed_config = yaml.safe_load(file)
             for task_name, task_config in parsed_config['tasks'].items():

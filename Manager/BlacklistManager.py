@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 
 from Model.Blacklist import Blacklist
+from Model.Task import Task
 
 
 class BlacklistManager:
@@ -18,6 +19,13 @@ class BlacklistManager:
         self.db.session.commit()
         return True
 
+    def delete_by_task_name(self, task_name:str):
+        stmt = Blacklist.__table__.delete().where(Blacklist.source == task_name)
+        self.db.engine.execute(stmt)
+        return True
+    def get_all(self):
+        blacklists = Blacklist.query.all()
+        return blacklists
     #
     # def findOneByUniqueId(self, uniqueId: str):
     #     return self.findOne({'uniqueId': uniqueId})
